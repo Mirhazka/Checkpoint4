@@ -89,7 +89,7 @@ Pour résoudre le problème on peut :
 * Modifier le propriétaire avec (par exemple) “chown wilder:wilder /home/wilder/travaux/”
 
 ### 3.4 D’après les éléments de la capture ci-dessous, si on ajoute un disque dur supplémentaire qui n'a qu'une seule partition, comment se nommera t'elle ?
-**IMAGE**
+![image](https://github.com/Mirhazka/Checkpoint4/blob/454e907eeb3e08c48bf5995602f1b07182f68ed3/Ressources/qUi0ODppBAERHPIKA5eUQ8WufZdIrjSb.png)
 
 Le périphérique actuel est /dev/sda1, donc si on ajoute un disque dur avec une seule partition, elle se nommera sdb1.
 
@@ -99,97 +99,96 @@ On peut utiliser « lsblk » et « fdisk –l ».
 
 ---
 
-**4. Exploiter un réseau IP (CCP 4)**
+## **4. Exploiter un réseau IP (CCP 4)**
 
-4.1 Complète le tableau ci-dessous :
+### 4.1 Complète le tableau ci-dessous :
 
 | **Adresse de réseau** | **CIDR** | **1ere adresse disponible** | **Dernière adresse disponible** | **Adresse de broadcast** |
 | --- | --- | --- | --- | --- |
 | 192.160.16.0 | 255.255.255.224 | 192.160.16.1 | 192.160.16.30 | 192.160.16.31 |
 | 192.160.16.32 | 255.255.255.224 | 192.160.16.33 | 192.160.16.62 | 192.160.16.63 |
 
-4.2 Complète le tableau ci-dessous :
+### 4.2 Complète le tableau ci-dessous :
 
 | **Décimal** | **Binaire** | **Hexadécimal** |
 | --- | --- | --- |
-| 9 | 0000 1001 | 0x 09 |
-| 127 | 0111 1111 | 0x 7F |
-| 255 | 1111 1111 | 0x FF |
-| 16 | 0001 0000 | 0x 10 |
+| 9 | *0000 1001* | *0x 09* |
+| 127 | *0111 1111* | 0x 7F |
+| 255 | *1111 1111* | *0x FF* |
+| 16 | 0001 0000 | *0x 10* |
 
-4.3
+### 4.3  Pour le schéma ci-dessous :
+- Quels sont les liens trunk ?
+- Quelle méthode de routage intervlan est utilisée ?
+
+![image](https://github.com/Mirhazka/Checkpoint4/blob/8210c779ebbe21430f4139d89459416e449d38be/Ressources/1fJ67Mrp6pX0zfJFt39oVy2Iw5pcnaQa.png)
 
 Liens trunk ?
-
-Ce sont les liens entre les switchs et le lien entre un switch et le routeur.
+- Ce sont les liens entre les switchs et le lien entre un switch et le routeur.
 
 Méthode de routage ?
+- Le routeur se charge de router entre les VLANs avec des id de vlans différents sur le même medium. La méthode de routage est « Router-on-a-stick ».
 
-Le routeur se charge de router entre les VLANs avec des id de vlans différents sur le même medium. La méthode de routage est « Router-on-a-stick ».
-
-4.4
+### 4.4 Sur un réseau IP, 2 PC ont la configuration IP suivante :
+- PC1 : 192.168.1.54/24
+- PC2 : 192.168.2.74/24
+Sans changer l'adresse IP des 2 PC, donne une solution matérielle et une modification du paramétrage à effectuer pour que les 2 PC puissent communiquer entre-eux.
 
 Solution matérielle :
-
-Installer un routeur pour interconnecter les deux sous-réseaux.
-
-Chaque PC sera connecté à une interface du routeur, et le routeur assurera la communication entre les deux sous-réseaux.
+- Installer un routeur pour interconnecter les deux sous-réseaux.
+- Chaque PC sera connecté à une interface du routeur, et le routeur assurera la communication entre les deux sous-réseaux.
 
 Modification du paramétrage :
+- Bien vérifier que PC1 utilise l’interface du routeur sur laquelle il est connecté comme passerelle par défaut. Même chose pour PC2 pour l’autre interface.
 
-Bien vérifier que PC1 utilise l’interface du routeur sur laquelle il est connecté comme passerelle par défaut. Même chose pour PC2 pour l’autre interface.
+### 4.5 Des ordinateurs sont connectés sur un switch qui n'a qu'un seul vlan, avec les configurations IP suivantes :
 
-4.5
+PC | Adresse IP |	Masque de sous-réseau
+--- | --- | ---
+PC1	| 192.168.10.8 | 255.255.255.0
+PC2	| 192.168.10.12 | 255.255.255.0
+PC3	| 192.168.10.10	| 255.255.0.0
+PC4	| 192.168.11.9 | 255.255.255.0
 
 Pour PC1 ?
-
-Il a l’adresse de réseau 192.168.10.0/24 qui est la même que celles de PC2 donc le ping fonctionne avec cette machine.
-
-Cette adresse de réseau est également un sous-réseau de celle de PC3, donc il peut renvoyer une trame « echo reply» à une demande « echo request » de PC3.
-
-Il ne peut pas communiquer directement avec PC4 car ils sont dans des réseaux différents.
+- Il a l’adresse de réseau 192.168.10.0/24 qui est la même que celles de PC2 donc le ping fonctionne avec cette machine.
+- Cette adresse de réseau est également un sous-réseau de celle de PC3, donc il peut renvoyer une trame « echo reply» à une demande « echo request » de PC3.
+- Il ne peut pas communiquer directement avec PC4 car ils sont dans des réseaux différents.
 
 Pour PC2 ?
-
-Son adresse de réseau est 192.168.10.0/24, donc il peut communiquer avec PC1. Comme PC2, cette adresse est dans un sous-réseaux de l’adresse réseau de PC3, donc il peut également envoyer une trame « echo reply» à une demande « echo request ».
+- Son adresse de réseau est 192.168.10.0/24, donc il peut communiquer avec PC1. Comme PC2, cette adresse est dans un sous-réseaux de l’adresse réseau de PC3, donc il peut également envoyer une trame « echo reply» à une demande « echo request ».
 
 Pour PC3 ?
-
-Il a l’adresse de réseau 192.168.0.0/16. Pour un ping vers PC1, PC3 prend l’adresse IP destination avec son propre masque, ce qui donne l’adresse de réseau « fictive » 192.168.0.0/16 pour PC1. PC3 considère alors que PC1 est dans son réseau et peut envoyer une trame « echo request ». PC1 peut répondre à cette requête.
-
-Même chose pour PC2.
-
-Pour PC4, PC3 « considère » qu’il a l’adresse de réseau 192.168.0.0/16 et donc lui envoie une trame « echo request ».
+- Il a l’adresse de réseau 192.168.0.0/16. Pour un ping vers PC1, PC3 prend l’adresse IP destination avec son propre masque, ce qui donne l’adresse de réseau « fictive » 192.168.0.0/16 pour PC1. PC3 considère alors que PC1 est dans son réseau et peut envoyer une trame « echo request ». PC1 peut répondre à cette requête.
+- Même chose pour PC2.
+- Pour PC4, PC3 « considère » qu’il a l’adresse de réseau 192.168.0.0/16 et donc lui envoie une trame « echo request ».
 
 Pour PC4 ?
-
-Son adresse de réseau est 192.168.11.0/24. Elle est différente de celle de PC1. Les 2 machines ne peuvent pas communiquer.
-
-Même constat avec PC2.
-
-Pour PC3, PC4 considère que son adresse de réseau est 192.168.10.24, donc ils ne sont pas dans le même réseau et PC4 ne peut pas envoyer une trame de réponse à la demande « echo request » de PC3.
+- Son adresse de réseau est 192.168.11.0/24. Elle est différente de celle de PC1. Les 2 machines ne peuvent pas communiquer.
+- Même constat avec PC2.
+- Pour PC3, PC4 considère que son adresse de réseau est 192.168.10.24, donc ils ne sont pas dans le même réseau et PC4 ne peut pas envoyer une trame de réponse à la demande « echo request » de PC3.
 
 En conclusion, seul les PC1, PC2, et PC3 peuvent communiquer entre-eux.
 
-4.6
+### 4.6 Quelles sont les actions possibles à mettre en œuvre pour sécuriser un réseau sans fil ?
 
 Les actions possibles sont :
+- Changer le nom du SSID : Modifiez le nom par défaut du réseau
+- Désactiver la diffusion du SSID (le cacher)
+- Durcir le chiffrement (par exemple WPA2 Entreprise ou WPA3)
+- Changer le mot de passe par défaut : Choisir un mot de passe fort et unique
+- Utilisez un réseau invité pour les personnes extérieures à l’entreprise
+- Mettre à jour le firmware des bornes wifi
 
-* Changer le nom du SSID : Modifiez le nom par défaut du réseau
-* Désactiver la diffusion du SSID (le cacher)
-* Durcir le chiffrement (par exemple WPA2 Entreprise ou WPA3)
-* Changer le mot de passe par défaut : Choisir un mot de passe fort et unique
-* Utilisez un réseau invité pour les personnes extérieures à l’entreprise
-* Mettre à jour le firmware des bornes wifi
-
-4.7 Compléter le tableau ci-dessous (ajouter des lignes si besoin) :
+### 4.7 Compléter le tableau ci-dessous (ajouter des lignes si besoin) :
+![image](https://github.com/Mirhazka/Checkpoint4/blob/8210c779ebbe21430f4139d89459416e449d38be/Ressources/ip9fmGmF9U9g5mUrn4BhyXSUSgfYXHc2.png)  
 
 | **Adresse de réseau** | **CIDR** | **Adresse de passerelle** | **Interface locale** |
 | --- | --- | --- | --- |
 | 192.168.1.0 | 255.255.255.0 | 172.14.1.1 | 172.14.1.2 |
 | 192.168.2.0 | 255.255.255.0 | 41.11.21.1 | 41.11.21.2 |
 
-4.8 Compléter le tableau ci-dessous :
+### 4.8 Compléter le tableau ci-dessous :
 
 | **Acronyme** | **Nom complet** | **Port(s) par défaut TCP** | **Port(s) par défaut UDP** |
 | --- | --- | --- | --- |
@@ -205,11 +204,12 @@ Les actions possibles sont :
 | NTP | Network Time Protocol |  | 123 |
 | POP3S | Post Office Protocol version 3 sécurisé | 995 |  |
 
-4.9
+### 4.9 Sur quels ports du switch peut-on brancher ce téléphone IP ?
+![image](https://github.com/Mirhazka/Checkpoint4/blob/8210c779ebbe21430f4139d89459416e449d38be/Ressources/iwCo95Nj2wNeXhAwaJcevshx1fkynTH2.png)
 
 Le téléphone IP a un chargeur donc on peut le brancher sur tous les ports, donc de 1 à 8.
 
-4.10 Compléter le tableau ci-dessous :
+### 4.10 Compléter le tableau ci-dessous :
 
 | **Protocole** | **Accès réseau** | **Internet** | **Transport** | **Application** |
 | --- | --- | --- | --- | --- |
@@ -223,6 +223,8 @@ Le téléphone IP a un chargeur donc on peut le brancher sur tous les ports, don
 | POP3 |  |  |  | x |
 | Telnet |  |  |  | x |
 | SNMP |  |  |  | x |
+
+---
 
 **5. Maintenir des serveurs dans une infrastructure virtualisée (CCP 5)**
 
