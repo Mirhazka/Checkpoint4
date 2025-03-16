@@ -1,1 +1,1 @@
-# Checkpoint 4 - Correctic
+# Checkpoint 4 - Correctif
